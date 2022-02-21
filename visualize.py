@@ -5,9 +5,8 @@ from sklearn import datasets
 from scipy.spatial import ConvexHull
 
 # BATASAN: SEMUA DATA MASUKKAN HARUS DALAM NUMERIK
-# BATASAN: DATA TARGET PADA PEMBACAAN CSV HARUS BINARY (AKAN DIUBAH DI MASA DEPAN)
 
-# Class Function
+# Class and Function
 class Color():
     COLORS = ["blue", "orange", "green", "red", "purple", "brown", "pink", "gray", "olive", "cyan"]
     i = 0
@@ -46,6 +45,7 @@ if __name__ == "__main__":
     my_parser.add_argument("first_argument", metavar="first_argument", type=str, help="atribut pertama yang ingin dievaluasi")
     my_parser.add_argument("second_argument", metavar="second_argument", type=str, help="atribut kedua yang ingin dievaluasi")
     my_parser.add_argument("-t", "--target", type=str, help="atribut yang dijadikan target", default="")
+    my_parser.add_argument("-c", "--class-name", type=str, nargs="+",help="nama kelas pada atribut target", default=[])
 
     args = my_parser.parse_args()
 
@@ -54,7 +54,7 @@ if __name__ == "__main__":
         df = pd.DataFrame(data.data, columns=data.feature_names)
         df["Target"] = pd.DataFrame(data.target)
 
-        if args.first_argument not in data.feature_names or args.second_argument not in data.feature_names or args.target != "":
+        if args.first_argument not in data.feature_names or args.second_argument not in data.feature_names or args.target != "" or args.class_name != []:
             print("Argumen tidak valid!")
             
         else:
@@ -65,7 +65,7 @@ if __name__ == "__main__":
         df = pd.DataFrame(data.data, columns=data.feature_names)
         df["Target"] = pd.DataFrame(data.target)
 
-        if args.first_argument not in data.feature_names or args.second_argument not in data.feature_names or args.target != "":
+        if args.first_argument not in data.feature_names or args.second_argument not in data.feature_names or args.target != "" or args.class_name != []:
             print("Argumen tidak valid!")
             
         else:
@@ -76,7 +76,7 @@ if __name__ == "__main__":
         df = pd.DataFrame(data.data, columns=data.feature_names)
         df["Target"] = pd.DataFrame(data.target)
 
-        if args.first_argument not in data.feature_names or args.second_argument not in data.feature_names or args.target != "":
+        if args.first_argument not in data.feature_names or args.second_argument not in data.feature_names or args.target != "" or args.class_name != []:
             print("Argumen tidak valid!")
             
         else:
@@ -86,11 +86,11 @@ if __name__ == "__main__":
         try:
             df = pd.read_csv(args.path)
 
-            if args.first_argument not in df.columns or args.second_argument not in df.columns or args.target not in df.columns:
+            if args.first_argument not in df.columns or args.second_argument not in df.columns or args.target not in df.columns or args.class_name == []:
                 print("Argumen tidak valid!")
             
             else:
-                plot_convex_hull(df=df, first_argument=args.first_argument, second_argument=args.second_argument, target=args.target, class_name=["fail", "success"]) # BUG: class_name dibaca dari args saja
+                plot_convex_hull(df=df, first_argument=args.first_argument, second_argument=args.second_argument, target=args.target, class_name=args.class_name)
 
         except:
             print(f"Database dengan relative path {args.path} tidak ada!")

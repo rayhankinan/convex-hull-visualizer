@@ -1,4 +1,16 @@
 import numpy as np
+import matplotlib.pyplot as plt
+
+# CLASS
+class Color():
+    COLORS = ["blue", "orange", "green", "red", "purple", "brown", "pink", "gray", "olive", "cyan"]
+    i = 0
+
+    def get_color():
+        new_color = Color.COLORS[Color.i % len(Color.COLORS)]
+        Color.i += 1
+
+        return new_color
 
 class ConvexHull():
     data = []
@@ -42,7 +54,7 @@ class ConvexHull():
                 if ConvexHull.data[i][0] == ConvexHull.data[maximum][0] and ConvexHull.data[i][1] > ConvexHull.data[maximum][1]:
                     maximum = i
         
-        else: # KEMUNGKINAN BUG
+        else:
             for i in self.indexData:
                 if self.distance(i) < self.distance(minimum):
                     minimum = i
@@ -68,7 +80,7 @@ class ConvexHull():
             left.line = [[minimum, maximum]]
             right.line = [[minimum, maximum]]
 
-        else: # BUG
+        else:
             pMin, pMax = self.find_extremum()
 
             if self.distance(pMin) > 0: # partisi atas
@@ -111,5 +123,25 @@ class ConvexHull():
 
         return np.array(self.line)
 
-    def is_intersecting(self, other):
-        return False
+# FUNCTION
+def plot_convex_hull(df, first_argument, second_argument, target, class_name):
+    plt.figure(figsize=(10, 6))
+    plt.title(f"{first_argument} vs {second_argument}")
+    plt.xlabel(first_argument)
+    plt.ylabel(second_argument)
+
+    for target_value in df[target].unique():
+        bucket = df[df[target] == target_value]
+
+        hull = ConvexHull(bucket[[first_argument, second_argument]].values)
+
+        plt.scatter(bucket[first_argument].values, bucket[second_argument].values, label=class_name[target_value])
+        color = Color.get_color()
+
+        for simplex in hull.create_convex(): # hull.simplices adalah numpy.ndarray of numpy.ndarray yang berisi dua index dari titik-titik terluar data yang jika dihubungkan membentuk sisi pada convex hull
+            # plt.plot([x1, x2], [y1, y2]) akan membentuk garis dari (x1, y1) ke (x2, y2)
+            
+            plt.plot(bucket[[first_argument, second_argument]].values[simplex, 0], bucket[[first_argument, second_argument]].values[simplex, 1], color)
+
+    plt.legend()
+    plt.show()

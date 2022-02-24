@@ -1,46 +1,12 @@
 import pandas as pd
-import matplotlib.pyplot as plt
 from argparse import ArgumentParser
 from sklearn import datasets
-# from scipy.spatial import ConvexHull
-from myConvexHull import ConvexHull
+from myConvexHull import plot_convex_hull
 
-# BATASAN: SEMUA DATA MASUKKAN HARUS DALAM NUMERIK
+# BATASAN: HANYA TERDEFINISI PADA DATASET CLASSIFICATION
+# BATASAN: SEMUA DATA ATRIBUT HARUS DALAM BENTUK NUMERIK
 
-# Class and Function
-class Color():
-    COLORS = ["blue", "orange", "green", "red", "purple", "brown", "pink", "gray", "olive", "cyan"]
-    i = 0
-
-    def get_color():
-        new_color = Color.COLORS[Color.i % len(Color.COLORS)]
-        Color.i += 1
-
-        return new_color
-
-def plot_convex_hull(df, first_argument, second_argument, target, class_name):
-    plt.figure(figsize=(10, 6))
-    plt.title(f"{first_argument} vs {second_argument}")
-    plt.xlabel(first_argument)
-    plt.ylabel(second_argument)
-
-    for target_value in df[target].unique():
-        bucket = df[df[target] == target_value]
-
-        hull = ConvexHull(bucket[[first_argument, second_argument]].values)
-
-        plt.scatter(bucket[first_argument].values, bucket[second_argument].values, label=class_name[target_value])
-        color = Color.get_color()
-
-        for simplex in hull.create_convex(): # hull.simplices adalah numpy.ndarray of numpy.ndarray yang berisi dua index dari titik-titik terluar data yang jika dihubungkan membentuk sisi pada convex hull
-            # plt.plot([x1, x2], [y1, y2]) akan membentuk garis dari (x1, y1) ke (x2, y2)
-            
-            plt.plot(bucket[[first_argument, second_argument]].values[simplex, 0], bucket[[first_argument, second_argument]].values[simplex, 1], color)
-
-    plt.legend()
-    plt.show()
-
-# Main Program
+# MAIN PROGRAM
 if __name__ == "__main__":
     my_parser = ArgumentParser(description="Masukkan nama database serta atribut yang ingin divisualisasi")
 

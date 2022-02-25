@@ -4,7 +4,7 @@ from sklearn import datasets
 from myConvexHull import plot_convex_hull
 
 # BATASAN: HANYA TERDEFINISI PADA DATASET CLASSIFICATION
-# BATASAN: SEMUA DATA ATRIBUT HARUS DALAM BENTUK NUMERIK
+# BATASAN: SEMUA DATA ATRIBUT ARGUMEN HARUS DALAM BENTUK NUMERIK
 
 # MAIN PROGRAM
 if __name__ == "__main__":
@@ -23,43 +23,40 @@ if __name__ == "__main__":
         df = pd.DataFrame(data.data, columns=data.feature_names)
         df["Target"] = pd.DataFrame(data.target)
 
-        if args.first_argument not in data.feature_names or args.second_argument not in data.feature_names or args.target != "" or args.class_name != []:
-            print("Argumen tidak valid!")
-            
-        else:
+        try:
             plot_convex_hull(df=df, first_argument=args.first_argument, second_argument=args.second_argument, target="Target", class_name=["Iris-Setosa", "Iris-Versicolour", "Iris-Virginica"])
+        except:
+            print("Argumen tidak valid!")
 
     elif args.path == "wine":
         data = datasets.load_wine()
         df = pd.DataFrame(data.data, columns=data.feature_names)
         df["Target"] = pd.DataFrame(data.target)
-
-        if args.first_argument not in data.feature_names or args.second_argument not in data.feature_names or args.target != "" or args.class_name != []:
-            print("Argumen tidak valid!")
             
-        else:
+        try:
             plot_convex_hull(df=df, first_argument=args.first_argument, second_argument=args.second_argument, target="Target", class_name=["class_0", "class_1", "class_2"])
+        except:
+            print("Argumen tidak valid!")
 
     elif args.path == "breast_cancer":
         data = datasets.load_breast_cancer()
         df = pd.DataFrame(data.data, columns=data.feature_names)
         df["Target"] = pd.DataFrame(data.target)
-
-        if args.first_argument not in data.feature_names or args.second_argument not in data.feature_names or args.target != "" or args.class_name != []:
-            print("Argumen tidak valid!")
             
-        else:
+        try:
             plot_convex_hull(df=df, first_argument=args.first_argument, second_argument=args.second_argument, target="Target", class_name=["WDBC-Malignant", "WDBC-Benign"])
+        except:
+            print("Argumen tidak valid!")
 
     else:
         try:
             df = pd.read_csv(args.path)
 
-            if args.first_argument not in df.columns or args.second_argument not in df.columns or args.target not in df.columns or args.class_name == []:
-                print("Argumen tidak valid!")
-            
-            else:
-                plot_convex_hull(df=df, first_argument=args.first_argument, second_argument=args.second_argument, target=args.target, class_name=args.class_name)
-
         except:
             print(f"Database dengan relative path {args.path} tidak ada!")
+
+        try:            
+            plot_convex_hull(df=df, first_argument=args.first_argument, second_argument=args.second_argument, target=args.target, class_name=args.class_name)
+
+        except:
+            print("Argumen tidak valid!")

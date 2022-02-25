@@ -125,9 +125,10 @@ class ConvexHull():
 
 # FUNCTION
 def plot_convex_hull(df, first_argument, second_argument, target, class_name):
+    temp_df = df.copy()
 
     # Mengubah data atribut target menjadi numerik
-    df[target].replace(class_name, [i for i in range(len(class_name))], inplace=True)
+    temp_df[target].replace(class_name, [i for i in range(len(class_name))], inplace=True)
 
     plt.figure(figsize=(10, 6))
     plt.title(f"{first_argument} vs {second_argument}")
@@ -135,8 +136,8 @@ def plot_convex_hull(df, first_argument, second_argument, target, class_name):
     plt.xlabel(first_argument)
     plt.ylabel(second_argument)
 
-    for target_value in df[target].unique():
-        bucket = df[df[target] == target_value]
+    for target_value in temp_df[target].unique():
+        bucket = temp_df[temp_df[target] == target_value]
 
         hull = ConvexHull(bucket[[first_argument, second_argument]].values)
 

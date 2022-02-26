@@ -12,6 +12,21 @@ Disusun untuk memenuhi Tugas Kecil 2 IF2211 Strategi Algoritma "Implementasi *Co
 ## Deskripsi Singkat Program
 
 ## Struktur Program
+```bash
+.
+│   .gitignore
+│   README.md
+│   requirements.txt
+│                   
+├───src
+│   │   myConvexHull.py
+│   └───visualize.py
+│           
+└───test
+        brain.csv
+        heart.csv
+        list.txt
+```
 
 ## Requirement Program
 * Python versi 3.8.5 atau lebih baru. Pastikan pula terdapat package PyPi (PIP) pada Python Anda.

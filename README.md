@@ -45,8 +45,8 @@ Disusun untuk memenuhi Tugas Kecil 2 IF2211 Strategi Algoritma "Implementasi *Co
 * **target_attribute** berisi nama atribut target pada *dataset* yang ingin dievaluasi (atribut akan dijadikan warna pada grafik).
 * **list_of_class_name** berisi kumpulan *string* yang dipisahkan sebagai spasi yang menyatakan setiap nama kelas pada atribut target.
 3. Catatan:
-* Jika Anda masih bingung dengan penjelasan pada README, Anda dapat menjalankan *command* `py visualize.py -h` atau `py visualize.py --help` pada *command prompt* untuk melihat penjelasan mendetail tentang program.
-* Jika Anda ingin menggunakan *dataset classification* bawaan *library* scikit-learn, Anda dapat menghilangkan argumen target_attribute dan class_name.
+* Jika Anda masih bingung dengan penjelasan pada [README](https://github.com/rayhankinan/convex-hull-visualizer/blob/main/README.md), Anda dapat menjalankan *command* `py visualize.py -h` atau `py visualize.py --help` pada *command prompt* untuk melihat penjelasan mendetail tentang program.
+* Jika Anda ingin menggunakan *dataset classification* bawaan *library* [scikit-learn](https://scikit-learn.org/), Anda dapat menghilangkan argumen **target_attribute** dan **class_name**.
 
 ## Author
 * Nama: Rayhan Kinan Muhannad

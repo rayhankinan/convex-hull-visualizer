@@ -11,6 +11,8 @@ Disusun untuk memenuhi Tugas Kecil 2 IF2211 Strategi Algoritma "Implementasi *Co
 
 ## Deskripsi Singkat Program
 
+![Quickhull Algorithm](https://upload.wikimedia.org/wikipedia/commons/4/42/Animation_depicting_the_quickhull_algorithm.gif)
+
 ## Struktur Program
 ```bash
 .
@@ -23,8 +25,10 @@ Disusun untuk memenuhi Tugas Kecil 2 IF2211 Strategi Algoritma "Implementasi *Co
 │   └───visualize.py
 │           
 └───test
+        banknote.csv
         brain.csv
         heart.csv
+        indiansdiabetes.csv
         list.txt
 ```
 
